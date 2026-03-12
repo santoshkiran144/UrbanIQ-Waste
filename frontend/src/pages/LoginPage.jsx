@@ -18,7 +18,7 @@ const LoginPage = () => {
       const user = await login(form);
       navigate(`/dashboard/${user.role}`);
     } catch (apiError) {
-      setError(apiError.response?.data?.message || "Unable to login");
+      setError(apiError.message || "Unable to login");
     }
   };
 

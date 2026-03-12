@@ -3,6 +3,18 @@ import api from "../api/client";
 
 const AuthContext = createContext(null);
 
+const extractApiErrorMessage = (error, fallbackMessage) => {
+  if (error.response?.data?.message) {
+    return error.response.data.message;
+  }
+
+  if (error.code === "ERR_NETWORK") {
+    return "Cannot reach the server. Check VITE_API_URL, backend status, and CORS settings.";
+  }
+
+  return fallbackMessage;
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const raw = localStorage.getItem("urbaniq_user");
@@ -28,6 +40,8 @@ export const AuthProvider = ({ children }) => {
       const { data } = await api.post("/auth/login", payload);
       persistSession(data.token, data.user);
       return data.user;
+    } catch (error) {
+      throw new Error(extractApiErrorMessage(error, "Unable to login"));
     } finally {
       setLoading(false);
     }
@@ -39,6 +53,8 @@ export const AuthProvider = ({ children }) => {
       const { data } = await api.post("/auth/signup", payload);
       persistSession(data.token, data.user);
       return data.user;
+    } catch (error) {
+      throw new Error(extractApiErrorMessage(error, "Unable to create account"));
     } finally {
       setLoading(false);
     }

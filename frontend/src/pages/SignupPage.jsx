@@ -41,7 +41,7 @@ const SignupPage = () => {
       const user = await signup(payload);
       navigate(`/dashboard/${user.role}`);
     } catch (apiError) {
-      setError(apiError.response?.data?.message || "Unable to create account");
+      setError(apiError.message || "Unable to create account");
     }
   };
 

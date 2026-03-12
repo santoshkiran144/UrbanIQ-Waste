@@ -17,6 +17,17 @@ const allowedOrigins = (process.env.CLIENT_URL || "")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+const normalizeOrigin = (value) => value?.replace(/\/$/, "");
+
+const hasMatchingHostnameSuffix = (origin, suffix) => {
+  try {
+    const { hostname, protocol } = new URL(origin);
+    return protocol === "https:" && hostname.endsWith(suffix);
+  } catch (_error) {
+    return false;
+  }
+};
+
 const isOriginAllowed = (origin) => {
   if (!origin) {
     return true;
@@ -26,7 +37,24 @@ const isOriginAllowed = (origin) => {
     return true;
   }
 
-  return allowedOrigins.includes(origin);
+  const normalizedOrigin = normalizeOrigin(origin);
+  const normalizedAllowedOrigins = allowedOrigins.map(normalizeOrigin);
+
+  if (normalizedAllowedOrigins.includes(normalizedOrigin)) {
+    return true;
+  }
+
+  return normalizedAllowedOrigins.some((allowedOrigin) => {
+    if (allowedOrigin?.includes("vercel.app")) {
+      return hasMatchingHostnameSuffix(normalizedOrigin, ".vercel.app");
+    }
+
+    if (allowedOrigin?.includes("localhost")) {
+      return /^https?:\/\/localhost(?::\d+)?$/i.test(normalizedOrigin);
+    }
+
+    return false;
+  });
 };
 
 app.use(
