@@ -12,10 +12,32 @@ import violationRoutes from "./routes/violationRoutes.js";
 dotenv.config();
 
 const app = express();
+const allowedOrigins = (process.env.CLIENT_URL || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const isOriginAllowed = (origin) => {
+  if (!origin) {
+    return true;
+  }
+
+  if (!allowedOrigins.length) {
+    return true;
+  }
+
+  return allowedOrigins.includes(origin);
+};
 
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "*"
+    origin(origin, callback) {
+      if (isOriginAllowed(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    }
   })
 );
 app.use(express.json());
