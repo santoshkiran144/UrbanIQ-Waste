@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "urbaniq-waste-frontend": "file:.."
+  }
+}

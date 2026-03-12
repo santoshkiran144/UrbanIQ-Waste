@@ -1,0 +1,33 @@
+{
+  "households": [
+    {
+      "householdId": "GREE-A101",
+      "buildingName": "Green Heights",
+      "unitNumber": "A-101",
+      "violationCount": 1,
+      "complianceScore": 90,
+      "imageUrl": "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=800&q=80",
+      "timestamp": "2026-03-10T08:20:00.000Z"
+    },
+    {
+      "householdId": "GREE-A102",
+      "buildingName": "Green Heights",
+      "unitNumber": "A-102",
+      "violationCount": 3,
+      "complianceScore": 70,
+      "imageUrl": "https://images.unsplash.com/photo-1530587191325-3db32d826c18?auto=format&fit=crop&w=800&q=80",
+      "timestamp": "2026-03-08T09:00:00.000Z"
+    }
+  ],
+  "violations": [
+    {
+      "_id": "vio-1",
+      "householdId": "GREE-A101",
+      "buildingName": "Green Heights",
+      "violationCount": 1,
+      "complianceScore": 90,
+      "imageUrl": "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=800&q=80",
+      "timestamp": "2026-03-10T08:20:00.000Z"
+    }
+  ]
+}

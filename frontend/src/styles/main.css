@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html.light body {
+    background:
+      radial-gradient(circle at top, rgba(20, 184, 126, 0.1), transparent 24%),
+      linear-gradient(180deg, #f8fffc, #edf7f1 50%, #f7fbf9);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-white antialiased;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+}
+
+@layer components {
+  .theme-surface {
+    @apply bg-[radial-gradient(circle_at_top,rgba(20,184,126,0.16),transparent_24%),linear-gradient(180deg,#020617,#071411_50%,#020617)] dark:text-white;
+  }
+
+  html.light .theme-surface {
+    background:
+      radial-gradient(circle at top, rgba(20, 184, 126, 0.1), transparent 24%),
+      linear-gradient(180deg, #f8fffc, #edf7f1 50%, #f7fbf9);
+    color: #0f172a;
+  }
+
+  .theme-panel {
+    @apply border border-white/10 bg-white/5 shadow-glass;
+  }
+
+  html.light .theme-panel {
+    border-color: rgba(15, 23, 42, 0.08);
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  }
+
+  .theme-popup {
+    @apply border border-white/10 bg-slate-950/95;
+  }
+
+  html.light .theme-popup {
+    border-color: rgba(15, 23, 42, 0.08);
+    background: rgba(255, 255, 255, 0.96);
+  }
+
+  .theme-hero {
+    @apply border border-brand-400/20 bg-gradient-to-br from-brand-500/20 to-white/5;
+  }
+
+  html.light .theme-hero {
+    border-color: rgba(20, 184, 126, 0.18);
+    background: linear-gradient(135deg, rgba(20, 184, 126, 0.1), rgba(255, 255, 255, 0.92));
+  }
+
+  .theme-text {
+    @apply text-white;
+  }
+
+  html.light .theme-text {
+    color: #0f172a;
+  }
+
+  .theme-subtext {
+    @apply text-slate-300;
+  }
+
+  html.light .theme-subtext {
+    color: #475569;
+  }
+
+  .theme-input {
+    @apply border border-white/10 bg-slate-950/60 text-white;
+  }
+
+  html.light .theme-input {
+    border-color: rgba(15, 23, 42, 0.1);
+    background: rgba(255, 255, 255, 0.92);
+    color: #0f172a;
+  }
+}
